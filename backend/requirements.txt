@@ -4,3 +4,4 @@ pymongo
 mlflow
 python-multipart
 PyPDF2
+dnspython
