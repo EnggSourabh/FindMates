@@ -1,8 +1,7 @@
-import mlflow
-
-
 def log_profile_count(profile_count: int) -> None:
     try:
+        import mlflow
+
         mlflow.set_experiment("Hackathon Team Matcher")
 
         with mlflow.start_run():
