@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pymongo
+mlflow
+python-multipart
+PyPDF2
