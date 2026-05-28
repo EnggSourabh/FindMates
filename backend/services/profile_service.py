@@ -9,6 +9,13 @@ def create_profile(profile: Profile) -> dict:
     collection = get_profiles_collection()
     payload = profile.model_dump()
 
+    if collection is None:
+        return {
+            "message": "Profile processed successfully",
+            "persisted": False,
+            "data": payload,
+        }
+
     try:
         collection.update_one({"id": payload.get("id")}, {"$set": payload}, upsert=True)
         profile_count = collection.count_documents({})
@@ -26,6 +33,9 @@ def create_profile(profile: Profile) -> dict:
 
 def list_profiles() -> list[dict]:
     collection = get_profiles_collection()
+
+    if collection is None:
+        return []
 
     try:
         return list(collection.find({}, {"_id": 0}))

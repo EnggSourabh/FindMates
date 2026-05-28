@@ -1,5 +1,13 @@
 import os
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+from pymongo import MongoClient
+
+client = MongoClient("mongodb+srv://findmatesadmin:49162536s@findmatescluster.di77oes.mongodb.net/?appName=FindMatesCluster")
+
+db = client["findmates"]
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
