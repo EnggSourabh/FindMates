@@ -7,6 +7,7 @@ import Timeline from "../components/home/Timeline";
 import DashboardPreview from "../components/home/DashboardPreview";
 import Stats from "../components/home/Stats";
 import Footer from "../components/home/Footer";
+import FeaturesTrack from "../components/home/FeaturesTrack";
 
 const features = [
   {
@@ -45,28 +46,7 @@ function Home() {
       <Hero />
 
       {/* Features */}
-      <section id="features" className="relative z-10 mx-auto max-w-7xl px-5 py-32 sm:px-8">
-        <div className="mb-16 text-center">
-          <h2 className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
-            Everything you need
-          </h2>
-          <p className="mt-4 text-lg text-gray-500">
-            Intelligent tools to manage the perfect hackathon.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, idx) => (
-            <FeatureCard
-              key={feature.title}
-              icon={feature.icon}
-              title={feature.title}
-              text={feature.text}
-              delay={idx * 0.08}
-            />
-          ))}
-        </div>
-      </section>
+      <FeaturesTrack />
 
       {/* Timeline */}
       <div className="relative z-10">

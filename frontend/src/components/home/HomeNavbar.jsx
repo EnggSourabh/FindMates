@@ -10,6 +10,15 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+function RollingNavItem({ text }) {
+  return (
+    <span className="rolling-nav-item h-5">
+      <span className="rolling-text-original">{text}</span>
+      <span className="rolling-text-duplicate" aria-hidden="true">{text}</span>
+    </span>
+  );
+}
+
 function HomeNavbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,37 +42,47 @@ function HomeNavbar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-xl font-extrabold tracking-tight text-gray-900">
+        
+        {/* Left: Logo */}
+        <Link to="/" className="flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-[#E1251B] focus-visible:ring-offset-2 rounded-sm">
+          <span className="text-xl font-extrabold tracking-tight text-[#111827]">
             find<span className="text-[#E1251B]">mates</span>
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden items-center gap-8 md:flex">
+        {/* Center: Rolling Nav Capsule */}
+        <nav 
+          className="hidden items-center md:flex" 
+          style={{
+            background: "rgba(0, 0, 0, 0.02)",
+            border: "1px solid #E5E7EB",
+            borderRadius: "30px",
+            backdropFilter: "blur(10px)",
+            padding: "4px"
+          }}
+        >
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
+              className="rolling-nav-link flex items-center justify-center px-5 py-2 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-[#E1251B] focus-visible:ring-inset rounded-full"
             >
-              {link.label}
+              <RollingNavItem text={link.label} />
             </a>
           ))}
         </nav>
 
-        {/* CTA */}
+        {/* Right: Buttons */}
         <div className="hidden items-center gap-3 md:flex">
           <Link
             to="/analytics"
-            className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:border-gray-300 hover:shadow-sm"
+            className="flex h-[40px] items-center justify-center rounded-full border border-[#E5E7EB] bg-white px-5 text-sm font-medium text-[#111827] transition-all duration-300 hover:border-gray-300 hover:bg-gray-50 hover:shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-[#E1251B] focus-visible:ring-offset-2"
           >
             Log In
           </Link>
           <Link
             to="/team-builder"
-            className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-gray-800 hover:shadow-md"
+            className="flex h-[40px] items-center justify-center rounded-full bg-[#111827] px-6 text-sm font-medium text-white transition-all duration-300 hover:bg-[#1f2937] hover:shadow-md outline-none focus-visible:ring-2 focus-visible:ring-[#E1251B] focus-visible:ring-offset-2"
           >
             Sign Up
           </Link>
@@ -72,12 +91,12 @@ function HomeNavbar() {
         {/* Mobile menu toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex flex-col gap-1.5 md:hidden"
+          className="flex flex-col gap-1.5 md:hidden p-2 outline-none focus-visible:ring-2 focus-visible:ring-[#E1251B]"
           aria-label="Toggle menu"
         >
-          <span className={`h-0.5 w-6 bg-gray-900 transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
-          <span className={`h-0.5 w-6 bg-gray-900 transition-opacity ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`h-0.5 w-6 bg-gray-900 transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+          <span className={`h-0.5 w-6 bg-[#111827] transition-transform duration-300 ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
+          <span className={`h-0.5 w-6 bg-[#111827] transition-opacity duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
+          <span className={`h-0.5 w-6 bg-[#111827] transition-transform duration-300 ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} />
         </button>
       </div>
 
@@ -93,14 +112,14 @@ function HomeNavbar() {
               key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="block py-3 text-sm font-medium text-gray-600 hover:text-gray-900"
+              className="block py-3 text-sm font-medium text-[#111827] hover:text-[#E1251B] transition-colors duration-200"
             >
               {link.label}
             </a>
           ))}
           <Link
             to="/team-builder"
-            className="mt-3 block w-full rounded-lg bg-gray-900 py-3 text-center text-sm font-medium text-white"
+            className="mt-3 block w-full rounded-full bg-[#111827] py-3 text-center text-sm font-medium text-white transition-colors duration-200 hover:bg-[#1f2937]"
           >
             Sign Up
           </Link>
