@@ -1,116 +1,111 @@
-import { ArrowRight, Brain, ChartNoAxesCombined, FileText, ShieldCheck, Users } from "lucide-react";
-import { motion } from "framer-motion";
+import { FileText, Users, ChartNoAxesCombined, HeartHandshake, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-import PageTransition from "../components/animations/PageTransition";
-import GlassCard from "../components/cards/GlassCard";
-import StatCard from "../components/StatCard";
-import { useTeamWorkspace } from "../hooks/useTeamWorkspace";
+import AnimatedBackground from "../components/home/AnimatedBackground";
+import Hero from "../components/home/Hero";
+import FeatureCard from "../components/home/FeatureCard";
+import Timeline from "../components/home/Timeline";
+import DashboardPreview from "../components/home/DashboardPreview";
+import Stats from "../components/home/Stats";
+import Footer from "../components/home/Footer";
 
 const features = [
   {
     icon: FileText,
-    title: "Resume intelligence",
-    text: "Upload PDFs, extract skills, and convert candidate data into structured team profiles.",
+    title: "Resume Skill Extraction",
+    text: "Upload PDFs and let our engine extract technical skills automatically, removing manual data entry.",
   },
   {
     icon: Users,
-    title: "Balanced team formation",
-    text: "Generate teams around roles, skills, availability, and chemistry instead of simple grouping.",
+    title: "Smart Team Matching",
+    text: "Generate teams around specific required roles and skill gaps instead of random grouping.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Team Chemistry",
+    text: "Compatibility scores based on overlapping interests, complementary skills, and shared goals.",
   },
   {
     icon: ChartNoAxesCombined,
-    title: "Live analytics",
-    text: "Every member and generated team updates insights across the workspace automatically.",
+    title: "Analytics Dashboard",
+    text: "Monitor workspace health, team formation progress, and skill distributions in real-time.",
   },
   {
-    icon: ShieldCheck,
-    title: "Admin monitoring",
-    text: "Track uploads, generated teams, activity, and operational signals from one dashboard.",
+    icon: Zap,
+    title: "AI Team Builder",
+    text: "Our intelligence engine resolves the 'who goes where' problem instantly for large hackathons.",
   },
 ];
 
 function Home() {
-  const { analytics } = useTeamWorkspace();
-
   return (
-    <PageTransition className="px-5 pb-12 pt-32 sm:px-8 lg:px-10">
-      <section className="grid min-h-[calc(100vh-5rem)] content-center gap-10 xl:grid-cols-[1.06fr_0.94fr]">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-100 shadow-lg shadow-cyan-500/10 backdrop-blur"
-          >
-            <Brain size={16} />
-            AI-powered student team formation
-          </motion.div>
+    <div className="bg-white text-gray-900">
+      <AnimatedBackground />
 
-          <h1 className="mt-8 max-w-4xl text-5xl font-semibold leading-tight tracking-tight text-white md:text-7xl">
-            Find the right teammates with{" "}
-            <span className="bg-gradient-to-r from-cyan-200 via-violet-200 to-emerald-200 bg-clip-text text-transparent">
-              AI clarity
-            </span>
-          </h1>
+      {/* Hero */}
+      <Hero />
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-            FindMates helps students analyze skills, form balanced hackathon teams, identify missing
-            roles, and understand team chemistry from one clean workflow.
+      {/* Features */}
+      <section id="features" className="relative z-10 mx-auto max-w-7xl px-5 py-32 sm:px-8">
+        <div className="mb-16 text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
+            Everything you need
+          </h2>
+          <p className="mt-4 text-lg text-gray-500">
+            Intelligent tools to manage the perfect hackathon.
           </p>
-
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link
-              to="/team-builder"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:bg-cyan-200"
-            >
-              Build Teams
-              <ArrowRight size={18} />
-            </Link>
-            <Link
-              to="/analytics"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-6 py-3 font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-violet-300/40 hover:bg-white/[0.08]"
-            >
-              View Analytics
-            </Link>
-          </div>
-
-          <div className="mt-12 grid max-w-2xl gap-3 sm:grid-cols-3">
-            {["Resume skill extraction", "Balanced teams", "Chemistry insights"].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-slate-300 backdrop-blur">
-                {item}
-              </div>
-            ))}
-          </div>
         </div>
 
-        <div className="grid content-center gap-4">
-          <GlassCard className="relative overflow-hidden p-6">
-            <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-cyan-300/10 blur-2xl" />
-            <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Workspace snapshot</p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <StatCard label="Members" value={analytics.totalMembers} detail="Ready for matching" />
-              <StatCard label="Teams" value={analytics.totalTeams} detail="Current generated groups" accent="text-violet-300" />
-              <StatCard label="Chemistry" value={`${analytics.averageChemistry || 0}%`} detail="Average score" accent="text-emerald-300" />
-              <StatCard label="Skill Gaps" value={analytics.missingSkills.length} detail="Coverage opportunities" accent="text-amber-300" />
-            </div>
-          </GlassCard>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {features.map((feature) => {
-              const Icon = feature.icon;
-
-              return (
-                <GlassCard key={feature.title} interactive className="p-5">
-                  <Icon className="text-cyan-300" size={24} />
-                  <h2 className="mt-4 text-lg font-semibold">{feature.title}</h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">{feature.text}</p>
-                </GlassCard>
-              );
-            })}
-          </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, idx) => (
+            <FeatureCard
+              key={feature.title}
+              icon={feature.icon}
+              title={feature.title}
+              text={feature.text}
+              delay={idx * 0.08}
+            />
+          ))}
         </div>
       </section>
-    </PageTransition>
+
+      {/* Timeline */}
+      <div className="relative z-10">
+        <Timeline />
+      </div>
+
+      {/* Dashboard Preview */}
+      <div className="relative z-10">
+        <DashboardPreview />
+      </div>
+
+      {/* Stats */}
+      <div className="relative z-10">
+        <Stats />
+      </div>
+
+      {/* Final CTA */}
+      <section id="contact" className="relative z-10 overflow-hidden py-32 text-center px-5">
+        <div className="absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E1251B]/5 blur-[100px]" />
+
+        <h2 className="text-4xl font-bold tracking-tight text-gray-900 md:text-6xl">
+          Build Better Teams with <span className="text-[#E1251B]">AI</span>
+        </h2>
+
+        <div className="mt-10">
+          <Link
+            to="/team-builder"
+            className="inline-flex items-center justify-center rounded-lg bg-gray-900 px-10 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg"
+          >
+            Get Started Now
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <div className="relative z-10">
+        <Footer />
+      </div>
+    </div>
   );
 }
 

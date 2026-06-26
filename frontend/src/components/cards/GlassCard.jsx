@@ -12,7 +12,7 @@ function GlassCard({ children, className = "", interactive = false }) {
   return (
     <Component
       {...motionProps}
-      className={`rounded-2xl border border-white/10 bg-white/[0.055] shadow-2xl shadow-black/20 backdrop-blur-2xl ${className}`}
+      className={`rounded-2xl border border-gray-200 bg-white shadow-sm ${className}`}
     >
       {children}
     </Component>

@@ -5,3 +5,4 @@ mlflow
 python-multipart
 PyPDF2
 dnspython
+python-dotenv

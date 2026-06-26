@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 function PrimaryButton({ children, className = "", variant = "primary", ...props }) {
   const variants = {
     primary:
-      "bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-500/20 hover:bg-cyan-200",
+      "bg-gray-900 text-white shadow-sm hover:bg-gray-800",
     secondary:
-      "border border-white/10 bg-white/[0.04] text-white hover:border-cyan-300/40 hover:bg-white/[0.08]",
+      "border border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50",
   };
 
   return (

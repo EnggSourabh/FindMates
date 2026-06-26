@@ -1,6 +1,6 @@
 function FormField({ label, children }) {
   return (
-    <label className="grid gap-2 text-sm text-slate-300">
+    <label className="grid gap-2 text-sm text-gray-600">
       <span className="font-medium">{label}</span>
       {children}
     </label>
@@ -8,6 +8,6 @@ function FormField({ label, children }) {
 }
 
 export const inputClass =
-  "min-h-12 rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300/70 focus:bg-slate-950";
+  "min-h-12 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[#E1251B]/50 focus:bg-white focus:ring-1 focus:ring-[#E1251B]/20";
 
 export default FormField;

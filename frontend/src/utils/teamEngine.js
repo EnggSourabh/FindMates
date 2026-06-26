@@ -13,30 +13,45 @@ const TEAM_CAPABILITIES = [
     label: "frontend expertise",
     skills: ["react", "javascript", "frontend", "ui"],
     roles: ["frontend", "full stack"],
+    targetRole: "Frontend Developer",
+    exampleSkills: ["React", "JavaScript", "UI integration"],
+    action: "Add a frontend-focused teammate or pair an existing React member with UI implementation tasks.",
   },
   {
     key: "backend",
     label: "backend expertise",
     skills: ["fastapi", "node.js", "mongodb", "backend", "api", "sql"],
     roles: ["backend", "full stack"],
+    targetRole: "Backend Developer",
+    exampleSkills: ["FastAPI", "Node.js", "MongoDB"],
+    action: "Recruit backend ownership for APIs, database design, and integration reliability.",
   },
   {
     key: "ai",
     label: "AI/ML expertise",
     skills: ["machine learning", "ml", "ai", "python", "analytics"],
     roles: ["ml engineer", "ai engineer", "data analyst"],
+    targetRole: "ML Engineer",
+    exampleSkills: ["Python", "Machine Learning", "Analytics"],
+    action: "Add ML or analytics depth so the team can own model logic and data-driven scoring.",
   },
   {
     key: "design",
     label: "UI/UX design",
     skills: ["ui/ux", "figma", "design", "ux", "product"],
     roles: ["designer", "product designer"],
+    targetRole: "Product Designer",
+    exampleSkills: ["Figma", "UX research", "Product thinking"],
+    action: "Bring in product design coverage for user flows, visual polish, and presentation clarity.",
   },
   {
     key: "presentation",
     label: "presentation or project leadership",
     skills: ["pitching", "presentation", "leadership", "communication"],
     roles: ["project lead", "presenter", "generalist"],
+    targetRole: "Presenter or Project Lead",
+    exampleSkills: ["Pitching", "Leadership", "Communication"],
+    action: "Assign a communication lead to own the pitch, demo story, and delivery rhythm.",
   },
 ];
 
@@ -111,6 +126,21 @@ export const getSkillGaps = (members) => {
   );
 };
 
+export const getSkillGapRecommendations = (members) => {
+  const coveredCapabilities = new Set(members.flatMap(getMemberCapabilities));
+
+  return TEAM_CAPABILITIES.filter((capability) => !coveredCapabilities.has(capability.key)).map(
+    (capability, index) => ({
+      key: capability.key,
+      capability: capability.label,
+      targetRole: capability.targetRole,
+      exampleSkills: capability.exampleSkills,
+      action: capability.action,
+      priority: index === 0 ? "High" : "Medium",
+    }),
+  );
+};
+
 export const getMemberCapabilities = (member) => {
   const searchable = [...parseList(member.skills), member.role || "", ...parseList(member.interests)]
     .join(" ")
@@ -149,6 +179,20 @@ const getAvailabilityScore = (members) => {
   return Math.round((bestOverlap / members.length) * 10);
 };
 
+const getSharedInterests = (members) => {
+  const interests = members.flatMap((member) =>
+    parseList(member.interests).map((interest) => interest.toLowerCase()),
+  );
+  const counts = interests.reduce((acc, interest) => {
+    acc[interest] = (acc[interest] || 0) + 1;
+    return acc;
+  }, {});
+
+  return Object.entries(counts)
+    .filter(([, count]) => count > 1)
+    .map(([interest]) => interest);
+};
+
 export const calculateBalanceScore = (members) => {
   if (!members.length) return 0;
 
@@ -172,9 +216,7 @@ export const calculateChemistry = (members) => {
   const uniqueSkills = new Set(members.flatMap((member) => parseList(member.skills))).size;
   const balanceScore = calculateBalanceScore(members);
   const availabilityScore = getAvailabilityScore(members);
-  const sharedInterestCount = members
-    .flatMap((member) => parseList(member.interests).map((item) => item.toLowerCase()))
-    .reduce((count, interest, _, all) => count + (all.indexOf(interest) !== all.lastIndexOf(interest) ? 1 : 0), 0);
+  const sharedInterestCount = getSharedInterests(members).length;
 
   const score =
     averageCompatibility * 0.44 +
@@ -185,6 +227,51 @@ export const calculateChemistry = (members) => {
     Math.min(sharedInterestCount, 5);
 
   return Math.max(50, Math.min(98, Math.round(score)));
+};
+
+export const getTeamCompatibilitySignals = (members) => {
+  if (!members.length) return [];
+
+  const capabilities = new Set(members.flatMap(getMemberCapabilities));
+  const uniqueRoles = new Set(members.map((member) => member.role)).size;
+  const availabilityScore = getAvailabilityScore(members);
+  const sharedInterests = getSharedInterests(members);
+  const gaps = getSkillGaps(members);
+  const signals = [
+    {
+      label: "Capability coverage",
+      value: `${capabilities.size}/${TEAM_CAPABILITIES.length}`,
+      tone: capabilities.size >= 4 ? "green" : "amber",
+    },
+    {
+      label: "Role diversity",
+      value: `${uniqueRoles} roles`,
+      tone: uniqueRoles >= Math.min(members.length, 3) ? "green" : "amber",
+    },
+    {
+      label: "Availability overlap",
+      value: `${availabilityScore}/10`,
+      tone: availabilityScore >= 6 ? "green" : "amber",
+    },
+  ];
+
+  if (sharedInterests.length) {
+    signals.push({
+      label: "Shared interests",
+      value: sharedInterests.slice(0, 2).join(", "),
+      tone: "green",
+    });
+  }
+
+  if (gaps.length) {
+    signals.push({
+      label: "Coverage gap",
+      value: gaps[0],
+      tone: "amber",
+    });
+  }
+
+  return signals;
 };
 
 const getTeamSkillCount = (team) => new Set(team.flatMap((member) => member.skills)).size;
@@ -240,6 +327,8 @@ export const generateSmartTeams = (members, teamSize = 4) => {
       chemistry: calculateChemistry(team),
       balanceScore: calculateBalanceScore(team),
       skillGaps: getSkillGaps(team),
+      recommendations: getSkillGapRecommendations(team),
+      compatibilitySignals: getTeamCompatibilitySignals(team),
       strengths: [...new Set(team.flatMap((member) => member.skills))].slice(0, 5),
       availabilityMatch: getAvailabilityScore(team),
     }));
@@ -288,5 +377,6 @@ export const getAnalytics = (members, teams) => {
       .slice(0, 5)
       .map(([name, count]) => ({ name, count })),
     missingSkills: getSkillGaps(members),
+    recommendations: getSkillGapRecommendations(members),
   };
 };

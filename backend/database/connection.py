@@ -30,6 +30,14 @@ def get_profiles_collection():
     return client[DATABASE_NAME]["profiles"]
 
 
+def get_team_runs_collection():
+    client = _get_client()
+    if client is None:
+        return None
+
+    return client[DATABASE_NAME]["team_runs"]
+
+
 def mongo_is_available() -> bool:
     client = _get_client()
     if client is None:

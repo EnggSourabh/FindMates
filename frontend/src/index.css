@@ -6,7 +6,7 @@ body {
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: #020617;
+  background: #ffffff;
 }
 
 button,
@@ -17,13 +17,27 @@ textarea {
 }
 
 ::selection {
-  background: rgba(103, 232, 249, 0.35);
-  color: #ffffff;
+  background: rgba(225, 37, 27, 0.15);
+  color: #000000;
 }
 
+/* Floating card animation — gentle bobbing */
 @keyframes float {
-  0%,
-  100% {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Larger float for background blobs */
+@keyframes float-blob {
+  0%, 100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
@@ -31,16 +45,12 @@ textarea {
   }
 }
 
-.animate-float {
-  animation: float 14s ease-in-out infinite;
-}
-
 .animate-float-delayed {
-  animation: float 18s ease-in-out infinite;
+  animation: float-blob 18s ease-in-out infinite;
   animation-delay: -6s;
 }
 
 .animate-float-slow {
-  animation: float 22s ease-in-out infinite;
+  animation: float-blob 22s ease-in-out infinite;
   animation-delay: -10s;
 }

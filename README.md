@@ -34,6 +34,8 @@ MONGO_URL=mongodb://localhost:27017
 DATABASE_NAME=hackathon_matcher
 ```
 
+> **Note**: Both the `frontend` and `backend` directories contain a `.env.example` file. Copy this file to `.env` to configure your local setup.
+
 ## Deployment
 
 Recommended simple deployment:
