@@ -4,8 +4,6 @@ import { profileApi, resumeApi, teamApi } from "../services/api";
 import {
   generateSmartTeams,
   getAnalytics,
-  getSkillGapRecommendations,
-  getTeamCompatibilitySignals,
   normalizeMember,
 } from "../utils/teamEngine";
 import { TeamContext } from "./teamContextObject";

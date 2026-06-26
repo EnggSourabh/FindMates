@@ -1,41 +1,15 @@
-import { FileText, Users, ChartNoAxesCombined, HeartHandshake, Zap } from "lucide-react";
+
 import { Link } from "react-router-dom";
 import AnimatedBackground from "../components/home/AnimatedBackground";
 import Hero from "../components/home/Hero";
-import FeatureCard from "../components/home/FeatureCard";
+
 import Timeline from "../components/home/Timeline";
 import DashboardPreview from "../components/home/DashboardPreview";
 import Stats from "../components/home/Stats";
 import Footer from "../components/home/Footer";
 import FeaturesTrack from "../components/home/FeaturesTrack";
 
-const features = [
-  {
-    icon: FileText,
-    title: "Resume Skill Extraction",
-    text: "Upload PDFs and let our engine extract technical skills automatically, removing manual data entry.",
-  },
-  {
-    icon: Users,
-    title: "Smart Team Matching",
-    text: "Generate teams around specific required roles and skill gaps instead of random grouping.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Team Chemistry",
-    text: "Compatibility scores based on overlapping interests, complementary skills, and shared goals.",
-  },
-  {
-    icon: ChartNoAxesCombined,
-    title: "Analytics Dashboard",
-    text: "Monitor workspace health, team formation progress, and skill distributions in real-time.",
-  },
-  {
-    icon: Zap,
-    title: "AI Team Builder",
-    text: "Our intelligence engine resolves the 'who goes where' problem instantly for large hackathons.",
-  },
-];
+
 
 function Home() {
   return (
