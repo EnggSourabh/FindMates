@@ -37,7 +37,7 @@ function DashboardPreview() {
         {/* Mockup Grid */}
         <div className="grid gap-6 md:grid-cols-3">
           <div className="col-span-2 space-y-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="rounded-xl bg-gray-50 p-4 border border-gray-100">
                 <div className="text-sm text-gray-400">Total Members</div>
                 <div className="mt-2 text-3xl font-bold text-gray-900">124</div>

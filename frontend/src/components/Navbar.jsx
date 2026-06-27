@@ -19,9 +19,9 @@ function Navbar() {
   const { analytics } = useTeamWorkspace();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white/80 px-4 py-3 shadow-sm backdrop-blur-lg">
-        <NavLink to="/" className="flex min-w-fit items-center gap-3">
+    <header className="fixed inset-x-0 bottom-0 sm:bottom-auto sm:top-0 z-50 sm:z-40 px-3 pb-3 pt-0 sm:pb-0 sm:pt-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 sm:gap-4 rounded-2xl border border-gray-200 bg-white/90 sm:bg-white/80 px-2 sm:px-4 py-2 sm:py-3 shadow-[0_-8px_30px_rgb(0,0,0,0.12)] sm:shadow-sm backdrop-blur-lg">
+        <NavLink to="/" className="hidden sm:flex min-w-fit items-center gap-3">
           <span>
             <span className="block text-lg font-bold tracking-tight text-gray-900">
               find<span className="text-[#E1251B]">mates</span>
@@ -30,7 +30,7 @@ function Navbar() {
           </span>
         </NavLink>
 
-        <nav className="flex flex-1 justify-start gap-2 overflow-x-auto md:justify-center">
+        <nav className="flex flex-1 justify-around sm:justify-start sm:gap-2 w-full sm:w-auto">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -39,7 +39,7 @@ function Navbar() {
                 to={item.to}
                 end={item.to === "/"}
                 className={({ isActive }) =>
-                  `group relative flex min-w-fit items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition sm:px-4 ${
+                  `group relative flex flex-col sm:flex-row flex-1 sm:flex-none items-center justify-center gap-1 sm:gap-2 rounded-xl px-1 sm:px-4 py-2 text-[10px] sm:text-sm font-medium transition ${
                     isActive
                       ? "text-white"
                       : "text-gray-500 hover:bg-gray-100 hover:text-gray-900"
@@ -55,9 +55,9 @@ function Navbar() {
                         transition={{ type: "spring", stiffness: 420, damping: 34 }}
                       />
                     )}
-                    <span className="relative flex items-center gap-2">
-                      <Icon size={17} />
-                      {item.label}
+                    <span className="relative flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
+                      <Icon className="w-[18px] h-[18px] sm:w-[17px] sm:h-[17px]" />
+                      <span>{item.label}</span>
                     </span>
                   </>
                 )}

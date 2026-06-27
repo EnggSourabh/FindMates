@@ -11,7 +11,7 @@ function AppLayout() {
     <div className="relative min-h-screen overflow-x-hidden bg-white text-gray-900">
       {!isHome && <AmbientBackground />}
       {isHome ? <HomeNavbar /> : <Navbar />}
-      <main className="min-h-screen">
+      <main className="min-h-screen pb-20 sm:pb-0">
         <Outlet />
       </main>
     </div>
