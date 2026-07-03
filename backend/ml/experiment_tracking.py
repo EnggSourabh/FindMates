@@ -44,11 +44,11 @@ def get_tracking_status() -> dict:
         return {
             "enabled": True,
             "experiment": EXPERIMENT_NAME,
-            "tracking_uri": mlflow.get_tracking_uri(),
+            "tracking_configured": bool(os.getenv("MLFLOW_TRACKING_URI")),
         }
     except Exception:
         return {
             "enabled": False,
             "experiment": EXPERIMENT_NAME,
-            "tracking_uri": os.getenv("MLFLOW_TRACKING_URI", "local mlruns"),
+            "tracking_configured": bool(os.getenv("MLFLOW_TRACKING_URI")),
         }

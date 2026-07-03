@@ -1,7 +1,7 @@
 export const profiles = [
   {
     id: "seed-1",
-    name: "Sourabh",
+    name: "Alex Chen",
     skills: ["React", "Node.js", "UI/UX"],
     interests: ["Product", "Frontend"],
     role: "Frontend Developer",
@@ -11,7 +11,7 @@ export const profiles = [
   },
   {
     id: "seed-2",
-    name: "Rahul",
+    name: "Jordan Lee",
     skills: ["Python", "Machine Learning", "FastAPI"],
     interests: ["AI", "APIs"],
     role: "ML Engineer",
@@ -21,7 +21,7 @@ export const profiles = [
   },
   {
     id: "seed-3",
-    name: "Priya",
+    name: "Taylor Morgan",
     skills: ["MongoDB", "Express", "Backend"],
     interests: ["Databases", "Systems"],
     role: "Backend Developer",
@@ -31,7 +31,7 @@ export const profiles = [
   },
   {
     id: "seed-4",
-    name: "Aman",
+    name: "Casey Rivera",
     skills: ["Figma", "UI", "Design"],
     interests: ["UX", "Brand"],
     role: "Product Designer",
@@ -41,7 +41,7 @@ export const profiles = [
   },
   {
     id: "seed-5",
-    name: "Neha",
+    name: "Riley Patel",
     skills: ["Docker", "DevOps", "Python"],
     interests: ["Automation", "Cloud"],
     role: "DevOps Engineer",
@@ -51,7 +51,7 @@ export const profiles = [
   },
   {
     id: "seed-6",
-    name: "Kabir",
+    name: "Morgan Singh",
     skills: ["SQL", "Analytics", "React"],
     interests: ["Data", "Dashboards"],
     role: "Data Analyst",
