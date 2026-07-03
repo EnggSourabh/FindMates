@@ -1,4 +1,4 @@
-# FindMates
+# FindMate
 
 AI-powered student team formation platform for hackathons. Students can add profiles, analyze resumes, generate balanced teams, review chemistry, and monitor team insights.
 
@@ -31,7 +31,7 @@ Backend defaults to:
 
 ```bash
 MONGO_URL=mongodb://localhost:27017
-DATABASE_NAME=hackathon_matcher
+DATABASE_NAME=FindMate
 ```
 
 > **Note**: Both the `frontend` and `backend` directories contain a `.env.example` file. Copy this file to `.env` to configure your local setup.
@@ -60,7 +60,7 @@ Start command: uvicorn main:app --host 0.0.0.0 --port $PORT
 
 ```bash
 MONGO_URL=your_mongodb_atlas_connection_string
-DATABASE_NAME=hackathon_matcher
+DATABASE_NAME=FindMate
 CORS_ORIGINS=https://your-vercel-app.vercel.app
 ```
 

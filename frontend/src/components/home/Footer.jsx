@@ -19,7 +19,7 @@ function Footer() {
         </div>
 
         <p className="text-sm text-gray-500">
-          © {new Date().getFullYear()} FindMates. All rights reserved.
+          © {new Date().getFullYear()} FindMate. All rights reserved.
         </p>
       </div>
     </footer>

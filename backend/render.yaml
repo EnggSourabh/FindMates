@@ -1,13 +1,13 @@
 services:
   - type: web
-    name: findmates-api
+    name: findmate-api
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATABASE_NAME
-        value: hackathon_matcher
+        value: FindMate
       - key: CORS_ORIGINS
         sync: false
       - key: MONGO_URL

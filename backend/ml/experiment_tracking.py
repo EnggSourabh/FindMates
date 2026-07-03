@@ -1,7 +1,7 @@
 import os
 
 
-EXPERIMENT_NAME = "Hackathon Team Matcher"
+EXPERIMENT_NAME = "FindMate"
 
 
 def _configure_mlflow():

@@ -4,9 +4,8 @@ from pymongo import MongoClient
 from pymongo.errors import ConfigurationError, PyMongoError, ServerSelectionTimeoutError
 
 
-MONGO_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017")
-DATABASE_NAME = os.getenv("DATABASE_NAME", "hackathon_matcher")
-
+MONGO_URL = os.getenv("MONGO_URL", "mongodb+srv://Sourabh:49162536sS@projectcluster.ugwosra.mongodb.net/FindMate=ProjectCluster")
+DATABASE_NAME = os.getenv("DATABASE_NAME", "FindMate")
 _client = None
 
 
